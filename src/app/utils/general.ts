@@ -1,6 +1,6 @@
 export function debounce<T extends (...args: any[]) => any>(
   func: T,
-  wait: number,
+  wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
 
@@ -19,52 +19,49 @@ export function debounce<T extends (...args: any[]) => any>(
 }
 
 export const removeNonAlphas = (s: string) => {
-  return s.replace(/[^a-zA-Z]/g, "");
+  return s.replace(/[^a-zA-Z]/g, '');
 };
 
-export function keyHasText<T>(obj: T, key: keyof T, text: string) {
-  return String(obj[key]).toLowerCase().includes(text.toLowerCase());
+export function keyHasText<T>(
+  obj: T,
+  key: keyof T,
+  text: string
+) {
+  return String(obj[key])
+    .toLowerCase()
+    .includes(text.toLowerCase());
 }
 
-export function isValidLinkedIn(s = "") {
+export function isValidLinkedIn(s = '') {
   const r = new RegExp(
-    /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm,
+    /^(http(s)?:\/\/)?([\w]+\.)?linkedin\.com\/(pub|in|profile)\/([-a-zA-Z0-9]+)\/*/gm
   );
 
   return r.test(s);
 }
 
 export function isValidGitHub(s?: string): boolean {
-  const regex = /^(http(s)?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9-]+(\/)?$/;
+  const regex =
+    /^(http(s)?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9-]+(\/)?$/;
 
-  return regex.test(s || "");
-}
-
-export function isValidName(s = "") {
-  const cleaned = s.trim();
-
-  if (cleaned.length < 5 || cleaned.split(" ").length !== 2) {
-    return false;
-  }
-
-  const r = new RegExp(
-    /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u,
-  );
-
-  return r.test(cleaned);
+  return regex.test(s || '');
 }
 
 export function toTitleCase(sentence: string): string {
   return sentence
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(" ");
+    .split(' ')
+    .map(
+      (word) =>
+        word.charAt(0).toUpperCase() +
+        word.slice(1).toLowerCase()
+    )
+    .join(' ');
 }
 
 export function moveItemUp<T>(list: T[], idx: number): T[] {
   // Check if the index is valid
   if (idx <= 0 || idx >= list.length) {
-    console.error("Invalid index");
+    console.error('Invalid index');
     return list;
   }
 
@@ -76,10 +73,13 @@ export function moveItemUp<T>(list: T[], idx: number): T[] {
   return list;
 }
 
-export function moveItemDown<T>(list: T[], idx: number): T[] {
+export function moveItemDown<T>(
+  list: T[],
+  idx: number
+): T[] {
   // Check if the index is valid
   if (idx < 0 || idx >= list.length - 1) {
-    console.error("Invalid index");
+    console.error('Invalid index');
     return list;
   }
 
@@ -99,11 +99,14 @@ export const numberFallback = (val?: number) => {
   return val || 0;
 };
 
-export function truncateString(input: string, maxLength: number = 100): string {
+export function truncateString(
+  input: string,
+  maxLength: number = 100
+): string {
   if (input.length <= maxLength) {
     return input;
   }
-  return input.substring(0, maxLength - 3) + "...";
+  return input.substring(0, maxLength - 3) + '...';
 }
 
 export const normalizeJobTitles = (str: string) => {
@@ -112,21 +115,28 @@ export const normalizeJobTitles = (str: string) => {
 
   // Remove punctuation and extra spaces
   normalized = normalized
-    .replace(/[^a-z\s]/g, "")
-    .replace(/\s+/g, " ")
+    .replace(/[^a-z\s]/g, '')
+    .replace(/\s+/g, ' ')
     .trim();
 
   // Split into words and remove common modifiers like "junior", "senior"
-  const wordsToIgnore = new Set(["junior", "senior", "intern", "trainee"]);
+  const wordsToIgnore = new Set([
+    'junior',
+    'senior',
+    'intern',
+    'trainee',
+  ]);
   const words = normalized
-    .split(" ")
+    .split(' ')
     .filter((word) => !wordsToIgnore.has(word));
 
   // Join the remaining words back into a normalized title
-  return words.join(" ");
+  return words.join(' ');
 };
 
-export function treeShake<T extends Record<string, any>>(obj: T): Partial<T> {
+export function treeShake<T extends Record<string, any>>(
+  obj: T
+): Partial<T> {
   return Object.keys(obj).reduce((acc, key) => {
     const value = obj[key];
     if (value !== undefined && value !== null) {

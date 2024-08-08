@@ -7,7 +7,6 @@ export async function GET() {
     const query = 'select * from players';
     const [rows] = await db.execute(query);
 
-    console.log({ rows });
     db.release();
 
     return NextResponse.json(rows);
