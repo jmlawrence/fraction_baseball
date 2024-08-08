@@ -105,7 +105,7 @@ export default function Home() {
         <div className='grid lg:grid-cols-2 xl:grid-cols-3 m-auto gap-8 w-full max-w-4xl'>
           {filteredPlayers.map((player) => (
             <div
-              className='rounded bg-white bg-gradient-to-r from-violet-500/50 to-fuchsia-500/50'
+              className='rounded bg-white bg-gradient-to-r from-violet-500/50 to-fuchsia-500/50 cursor-pointer hover:shadow transition-all'
               key={player.id}
               onClick={() => {
                 setActivePlayerDescription('');
