@@ -39,6 +39,18 @@ export default function Home() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (activePlayer) {
+      askAI(
+        `Can you give me a paragraph about this baseball player: ${activePlayer.name}`
+      ).then((resp) => {
+        setActivePlayerDescription(resp);
+      });
+    } else {
+      setActivePlayerDescription('');
+    }
+  }, [activePlayer, askAI]);
+
   const filteredPlayers = useMemo(() => {
     if (filter.trim().length > 0) {
       return players
@@ -52,18 +64,6 @@ export default function Home() {
 
     return players.slice(0, 10);
   }, [filter, players]);
-
-  useEffect(() => {
-    if (activePlayer) {
-      askAI(
-        `Can you give me a paragraph about this baseball player: ${activePlayer.name}`
-      ).then((resp) => {
-        setActivePlayerDescription(resp);
-      });
-    } else {
-      setActivePlayerDescription('');
-    }
-  }, [activePlayer, askAI]);
 
   return (
     <>
