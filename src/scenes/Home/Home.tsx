@@ -59,10 +59,10 @@ export default function Home() {
             .toLowerCase()
             .includes(filter.toLowerCase())
         )
-        .slice(0, 10);
+        .slice(0, 9);
     }
 
-    return players.slice(0, 10);
+    return players.slice(0, 9);
   }, [filter, players]);
 
   return (
